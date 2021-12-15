@@ -1,0 +1,128 @@
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE departement (
+	id INTEGER NOT NULL, 
+	nom_departement VARCHAR(100), 
+	nom_direction VARCHAR(100), 
+	PRIMARY KEY (id)
+);
+INSERT INTO departement VALUES(1,'A2I','DSI');
+INSERT INTO departement VALUES(2,'EAI','DSI');
+INSERT INTO departement VALUES(3,'DD','DST');
+INSERT INTO departement VALUES(4,'SMC','DSI');
+INSERT INTO departement VALUES(5,'APS','DSI');
+INSERT INTO departement VALUES(6,'INS','DSI');
+INSERT INTO departement VALUES(7,'OCIO','DSI');
+INSERT INTO departement VALUES(8,'CSPS','DSI');
+INSERT INTO departement VALUES(9,'DIF','DAC');
+INSERT INTO departement VALUES(10,'CES','DAC');
+INSERT INTO departement VALUES(11,NULL,'DSI');
+INSERT INTO departement VALUES(12,NULL,'DST');
+INSERT INTO departement VALUES(13,NULL,'DAC');
+CREATE TABLE service (
+	id INTEGER NOT NULL, 
+	nom_service VARCHAR(100), 
+	perimetre VARCHAR(100), 
+	departement_id INTEGER, sous_service VARCHAR(255), 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(departement_id) REFERENCES departement (id)
+);
+INSERT INTO service VALUES(1,'ARS','Support Sécurité & Réseau (ARS)',1,'null');
+INSERT INTO service VALUES(2,'EPD','Suuport Applications digitales, OrangeMoney, IRIS',2,'null');
+INSERT INTO service VALUES(3,'FAC','Support GAIA, Matrix, 601, …',2,'null');
+INSERT INTO service VALUES(4,'MRI','Support Mediation Zone, Interco, Roaming, …',2,'null');
+INSERT INTO service VALUES(5,'CORP','Support Corporate : IPM, Kelio, Docubase, …',2,'null');
+INSERT INTO service VALUES(6,'DBA','Support BDD (DBA)',1,'null');
+INSERT INTO service VALUES(7,'DBM','Décisionnel, MONETA, NIKIRA,Big Data,Radar , Fraude & RA (DST/DD/DBM)',3,'null');
+INSERT INTO service VALUES(8,'SICLI','Galaxy OMEGA',2,'SVI');
+INSERT INTO service VALUES(9,'SICLI','KIBARU, Simplissimo, NESSICO,  KPSA, …',2,'SICO');
+INSERT INTO service VALUES(10,'SSBA','Support Systèmes Unix (SSBA)',1,'LINUX');
+INSERT INTO service VALUES(11,'SSBA','Support Systèmes WINDOWS (SSBA)',1,'WINDOWS');
+INSERT INTO service VALUES(12,'SSBA','Support Systèmes Sauvegarde&Stockage (SSBA)',1,'Sauvegarde&Stockage');
+INSERT INTO service VALUES(13,'COP','Support COP',1,'null');
+CREATE TABLE personne (
+	id INTEGER NOT NULL, 
+	nom VARCHAR(100), 
+	prenom VARCHAR(100), 
+	email VARCHAR(100), 
+	etat VARCHAR(100), 
+	date_time DATETIME, 
+	telephone VARCHAR(100), 
+	service_id INTEGER, 
+	status VARCHAR(100), 
+	code INTEGER, type_astreintes VARCHAR(100), niveau_astreintes VARCHAR(100), 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(service_id) REFERENCES service (id)
+);
+INSERT INTO personne VALUES(1,'Mame Biram','DIOUF','null','OK','2021-12-13 14:14:01.624875','77 644 57 38',1,' chef de service',NULL,'AO','N+1');
+INSERT INTO personne VALUES(2,'Mady','GUEYE','null','E','2021-12-13 14:12:01.443321','77 450 40 34',1,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(3,'Ibrahima','FALL','null','NA','2021-12-13 14:12:01.457828','77 450 37 12',1,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(4,'Rahmane','DIAKHO','null','NA','2021-12-13 14:12:01.463664','77 569 56 41',1,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(5,'Amadou Moctar','NDIAYE','null','NE','2021-12-13 14:12:01.395073','77 569 39 54',1,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(6,'Gora','DIARRA','null','OK','2021-12-13 14:14:01.666497','77 529 69 59',2,'chef de service',NULL,'AO','N+1');
+INSERT INTO personne VALUES(7,'Assane ','SECK','null','E','2021-12-13 14:12:01.755682','77 569 60 65',2,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(8,'Moucharda habiballah','SEYE','null','NA','2021-12-13 14:12:01.767123','77 420 32 91',2,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(9,'Cheikh Djibril ','SOW','null','NA','2021-12-13 14:12:01.774654','77 377 25 44',2,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(10,'Serigne Saliou ','GUEYE','null','NE','2021-12-13 14:12:01.736686','77 816 91 45',2,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(11,'Samba','DIOP','null','NE','2021-12-13 14:12:01.807874','77 099 58 16',3,'chef de service',NULL,'AO','N+1');
+INSERT INTO personne VALUES(12,'Papa Thierno','DIALLO','null','OK','2021-12-13 14:14:01.717427','77 638 97 97',3,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(13,'Marie Hann','DIOP','null','E','2021-12-13 14:10:01.604754','77 450 56 97',3,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(14,'Moustapha','SARR','null','OK','2021-12-13 14:14:01.765998','77 099 98 25',4,'chef de service',NULL,'AO','N+1');
+INSERT INTO personne VALUES(15,'Khady','SECK','null','E','2021-12-13 14:12:02.299051','77 644 91 40',4,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(16,'Matar','LO','null','NA','2021-12-13 14:12:02.305403','77 333 66 08',4,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(17,'Mohamed ','DEME','null','NA','2021-12-13 14:12:02.311603','77 099 11 93',4,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(18,'Ahmed B. S. B.','SEYE','null','NE','2021-12-13 14:12:02.242819','77 099 14 29',4,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(19,'Sada Kalidou','SOW','null','OK','2021-12-13 14:14:01.792661','77 099 28 40',5,'chef de service',NULL,'AO','N+1');
+INSERT INTO personne VALUES(20,'Jean Charles','BOCANDE','null','E','2021-12-13 14:12:02.335389','77 639 89 99',5,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(21,'Ndiaga ','BA','null','NE','2021-12-13 14:12:02.367319','77 099 53 91',6,'chef de service',NULL,'AO','N+1');
+INSERT INTO personne VALUES(22,'Magatte','THIAM','null','OK','2021-12-13 14:14:01.844013','77 333 60 88',6,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(23,'Elhadji Amadou ','GUEYE','null','E','2021-12-13 14:10:01.703215','77 099 53 05',6,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(24,'Ababacar','DIOUF','null','NE','2021-12-13 14:10:01.748193','77 637 64 13',7,'chef de service',NULL,'AO','N+1');
+INSERT INTO personne VALUES(25,'Awa ','THIAM','null','NE','2021-12-13 14:12:02.395081','77 644 65 35',7,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(26,'Mouhamed','TALL','null','OK','2021-12-13 14:14:01.888814','77 569 60 64',7,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(27,'Aminata Macky','TALL','null','E','2021-12-13 14:08:02.333404','77 639 49 84',7,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(28,'Oumar','SALL','null','OK','2021-12-13 14:14:01.936097','77 569 31 03',8,'chef de service',NULL,'AO','N+1');
+INSERT INTO personne VALUES(29,'Pape Mor','SYLLA','null','E','2021-12-13 14:12:02.421061','77 099 28 05',8,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(30,'Cheikh Abdallah','SOUGOU','null','NE','2021-12-13 14:10:01.806022','77 099 28 48',9,'chef de service',NULL,'AO','N+1');
+INSERT INTO personne VALUES(31,'Dominique N.','FAYE','null','NE','2021-12-13 14:12:02.455573','77 099 52 96',9,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(32,'Ndeye Ndella','SAMB','null','OK','2021-12-13 14:14:01.963618','77 740 16 72',9,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(33,'Khadidiatou','SEYE','null','E','2021-12-13 14:08:04.354625','77 333 32 24',9,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(34,'Thierry Delphin KAYA ','MATIMBOU','null','NE','2021-12-13 14:12:02.487836','77 644 91 42',10,'chef de service',NULL,'AO','N+1');
+INSERT INTO personne VALUES(35,'Ndiaga ','GUEYE','null','OK','2021-12-13 14:14:01.989992','77 099 98 37',10,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(36,'Diallo','KANE','null','E','2021-12-13 14:10:01.831328','78 620 49 41',10,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(37,'Sire','DIAGNE','null','NE','2021-12-13 14:12:02.511626','77 450 20 77',11,'chef de service',NULL,'AO','N+1');
+INSERT INTO personne VALUES(38,'Guirguélia Flore Providence','SADIO','null','OK','2021-12-13 14:14:02.021666','77 099 36 11',11,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(39,'Saliou','SAGNE','null','E','2021-12-13 14:10:01.878676','77 644 73 99',11,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(40,'Mouhamadou Sylla','DIENG','null','NE','2021-12-13 14:12:02.535539','78 620 49 44',12,'chef de service',NULL,'AO','N+1');
+INSERT INTO personne VALUES(41,'Sire','DIAGNE','null','OK','2021-12-13 14:14:02.069006','77 450 20 77',12,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(42,'Mamour Ben Ousmane','NDIAYE','null','E','2021-12-13 14:10:01.925749','77 330 35 65',12,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(43,'Djibril','SOW','null','NE','2021-12-13 14:10:01.966595','77 631 04 76',13,'chef de service',NULL,'AO','N+1');
+INSERT INTO personne VALUES(44,'Babacar ','SAKHO','null','NE','2021-12-13 14:12:02.579145','77 099 46 36',13,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(45,'Ndeye Ndack','SARR','null','OK','2021-12-13 14:14:02.101802','77 644 91 24',13,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(46,'Alioune ','DIAGNE','null','E','2021-12-13 14:08:07.202668','78 589 80 34',13,'agent',NULL,'AO','N');
+INSERT INTO personne VALUES(47,'Amadou Wane ','GUISSE','null','NA','2021-12-13 14:08:07.415361','77 099 53 04',13,'agent',NULL,'AO','N');
+CREATE TABLE AstreinteManageriale ( 
+id INTEGER NOT NULL, 
+nom VARCHAR(100), 
+prenom VARCHAR(100), 
+email VARCHAR(100), 
+etat VARCHAR(100), 
+date_time DATETIME, 
+telephone VARCHAR(100), 
+departement_id INTEGER, 
+status VARCHAR(100), 
+niveau_astreintes VARCHAR(100), 
+PRIMARY KEY (id), FOREIGN KEY(departement_id) REFERENCES departement (id) );
+INSERT INTO AstreinteManageriale VALUES(1,'Arona','NIANG','null',NULL,NULL,'77 569 85 79',9,NULL,'N+2');
+INSERT INTO AstreinteManageriale VALUES(2,'Papa Djibril','GUEYE','null',NULL,NULL,'77 569 91 51',10,NULL,'N+2');
+INSERT INTO AstreinteManageriale VALUES(3,'Mouhamadou lamine','CAMARA','null',NULL,NULL,'77 637 62 73',5,NULL,'N+2');
+INSERT INTO AstreinteManageriale VALUES(4,'Serigne Abdou Aziz','WADE','null',NULL,NULL,'77 639 60 38',6,NULL,'N+2');
+INSERT INTO AstreinteManageriale VALUES(5,'Malado Baba','WONE','null',NULL,NULL,'77 450 37 16',7,NULL,'N+2');
+INSERT INTO AstreinteManageriale VALUES(6,'Amadou Mactar','NIANG','null',NULL,NULL,'77 644 30 68',8,NULL,'N+2');
+INSERT INTO AstreinteManageriale VALUES(7,'Saer','TOURE','null',NULL,NULL,'77 544 49 69',2,NULL,'N+2');
+INSERT INTO AstreinteManageriale VALUES(8,'Coumba Diouf','NDIAYE','null',NULL,NULL,'77 637 75 07',4,NULL,'N+2');
+INSERT INTO AstreinteManageriale VALUES(9,'Joseph Edouard','NDIAYE','null',NULL,NULL,'77 569 25 37',1,NULL,'N+2');
+INSERT INTO AstreinteManageriale VALUES(10,'Racky Sada','WANE','null',NULL,NULL,'77 569 03 86',11,NULL,'N+3');
+INSERT INTO AstreinteManageriale VALUES(11,'Ibrahima','SAMB','null',NULL,NULL,'77 644 40 80',13,NULL,'N+3');
+INSERT INTO AstreinteManageriale VALUES(12,'Coumba Diouf','NDIAYE','null',NULL,NULL,'77 637 75 07',4,NULL,'N+3');
+COMMIT;

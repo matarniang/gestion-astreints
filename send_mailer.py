@@ -8,49 +8,46 @@ from email import encoders
 import os
 from base import *
 import json
-#import pyodbc
 import pandas as pd
 from pretty_html_table import build_table
 
-content = open('../api-astreintes/config/gmail.json', mode='r', encoding=None)
-config = json.load(content)
-
-# print(config['username'])
-email = config['username']
-password = config['password']
-sender = 'balloniang415@gmail.com'
+#content = open("config/gmail.json", mode="r", encoding=None)
+#config = json.load(content)
+#email = config["username"]
+#password = config["password"]
+password = "iqsrsrxqhmvehkde"
+email = "balloniang415@gmail.com"
+sender = "balloniang415@gmail.com"
 
 
 # receiver = ['balloniang415@gmail.com','disi2212@gmail.com','khadyfall777@yahoo.fr','seckkhadime2@gmail.com']
-def get_gdp_data(rst_astreint):
-    astreints = rst_astreint.json[0]
-    astreint_prochains = rst_astreint.json[1]
-    email_astreint = rst_astreint.json[0]["email"]
-    email_astreint_prochains = rst_astreint.json[1]["email"]
-    chef_service = 'balloniang415@gmail.com'
-    receiver = [email_astreint, email_astreint_prochains]
+def get_gdp_data(astreints:list):
+    prenom_ast=[]
+    nom_ast=[]
+    telephone_ast=[]
+    etat_ast=[]
+    service_ast=[]
+    for astreint in astreints:
+        prenom_ast.append(astreint.prenom)
+        nom_ast.append(astreint.nom)
+        telephone_ast.append(astreint.telephone)
+        etat_ast.append(astreint.etat)
+        service_ast.append(astreint.service.perimetre)
 
-    gdp_dict = {'Prenom' :  [rst_astreint.json[0]['prenom'],    rst_astreint.json[1]['prenom']],
-                 'Nom':      [rst_astreint.json[0]['nom'],       rst_astreint.json[1]['nom']],
-                 'email':    [rst_astreint.json[0]['email'],     rst_astreint.json[1]['email']],
-                 'Matricule':[ rst_astreint.json[0]['password'], rst_astreint.json[1]['password']],
-                 'Etat':     [ rst_astreint.json[0]['etat'],     rst_astreint.json[1]['etat']]
-                }
-    data = pd.DataFrame(gdp_dict)
+    dict = {'PRENOM': prenom_ast, 'NOM': nom_ast, 'TELEPHONE': telephone_ast, 'PERIMETRE': service_ast}
+    data = pd.DataFrame(dict)
     output = build_table(data, "blue_light")
-    return send_mail(output,chef_service,email_astreint,email_astreint_prochains)
+    return send_mail(output)
 
 
-def send_mail(output,chef_service,email_astreint,email_astreint_prochains):
+def send_mail(output):
 
     body_content = output
-    body_as = "Bonsoir Monsieur/Madame vous devez gerer les astreintes cette semaines Merci et Bonne Nuit"
-    body_asp = "Bonsoir Monsieur/Madame vous devez gerer les astreintes la semaines prochaines pour valider : <a href='#'>validation</>"
-    email_receved(body_content,chef_service)
-    email_receved(body_as,email_astreint)
-    email_receved(body_asp,email_astreint_prochains)
-
-
+    #body_as = "Bonsoir Monsieur/Madame vous devez gerer les astreintes cette semaines Merci et Bonne Nuit"
+    #body_asp = "Bonsoir Monsieur/Madame vous devez gerer les astreintes la semaines prochaines pour valider : <a href='#'>validation</>"
+    email_receved(body_content,sender)
+    #email_receved(body_as,email_astreint)
+    #email_receved(body_asp,email_astreint_prochains)
 
 def email_receved(body,receveur):
     message = MIMEMultipart()
@@ -58,7 +55,7 @@ def email_receved(body,receveur):
     message['From'] = 'balloniang415@gmail.com'
     message.attach(MIMEText(body, "html"))
     msg_body = message.as_string()
-    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server = smtplib.SMTP('smtp.gmail.com',587)
     server.starttls()
     server.login(email, password)
     server.sendmail(sender, receveur, msg_body)
