@@ -26,8 +26,15 @@ from base import *
 #         compteurI = compteurI + 1
 
 # print("compteurI: {}  pers_in_service: {}".format(compteurI,len(pers_in_service)))
+from base import *
 
-manageriale = AstreinteManageriale.query.filter_by(niveau_astreintes="N+2")
+personnes = AstreinteManageriale.query.filter_by(niveau_astreintes="N+1").first()
 
-for personne in manageriale:
-    print("compteurI: {}  {} {}  {}".format(personne.nom,personne.prenom,personne.niveau_astreintes,personne.departement_id))
+# print(compteurP(personnes))
+#
+# def compteurP(personnes):
+#     indice=0
+#     for personne in personnes:
+#         indice = indice + 1
+#     return indice
+print(len(personnes))

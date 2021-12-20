@@ -302,3 +302,12 @@
 #
 # # * * * * * cd /Users/user/Documents/python/api-astreintes && . venv/bin/activate && python base.py >> cron.log 2>&1
 # # */60 * * * * curl http://127.0.0.1:5000/astreintes
+
+# if personne.etat == "OK":
+#     personne.etat = "NE"
+# elif personne.etat == "E":
+#     personne.etat = "OK"
+#     personne.code = 1
+#     personne.date_time = datetime.utcnow()
+#     db.session.add(personne)
+#     db.session.commit()

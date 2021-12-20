@@ -48,16 +48,16 @@ def get_departement():
 ######################################################### CLASS SERVICE ###################################################################
 
 class Service(db.Model):
-    id=db.Column(db.Integer, primary_key=True)
+    id=db.Column(db.Integer,primary_key=True)
     nom_service=db.Column(db.String(100))
     perimetre=db.Column(db.String(100) )
-    departement_id=db.Column(db.Integer, db.ForeignKey('departement.id'))
-    sous_service = db.Column(db.String(255))
-    personnes= db.relationship('Personne',backref=db.backref('service'))
+    departement_id=db.Column(db.Integer,db.ForeignKey('departement.id'))
+    sous_service=db.Column(db.String(255))
+    personnes=db.relationship('Personne',backref=db.backref('service'))
 
 class ServiceSchema(ma.Schema):
     class Meta:
-        fields=('id', 'nom_service', 'perimetre','departement_id')
+        fields=('id', 'nom_service','perimetre','departement_id')
 service_schema = ServiceSchema()
 services_schema = ServiceSchema(many=True)
 
@@ -91,7 +91,7 @@ class Personne(db.Model):
 
 class PersonneSchema(ma.Schema):
     class Meta:
-        fields=('id','nom', 'prenom', 'email','etat','password','service_id','status', 'date_time')
+        fields=('id', 'nom', 'prenom', 'email', 'etat', 'password', 'service_id', 'status','date_time')
 
 personne_schema = PersonneSchema()
 personnes_schema = PersonneSchema(many=True)
@@ -110,6 +110,7 @@ class AstreinteManageriale(db.Model):
     status = db.Column(db.String(100))
     code = db.Column(db.Integer, nullable=True, default=0)
     niveau_astreintes = db.Column(db.String(100))
+
 
 class AstreinteMSchema(ma.Schema):
     class Meta:
@@ -153,99 +154,141 @@ def update_personne(id):
     db.session.commit()
     return personne_schema.jsonify(personne)
 
-@app.route('/delete/<id>', methods=['DELETE'])
+@app.route('/delete/<id>',methods=['DELETE'])
 def delete_personne(id):
     personne = Personne.query.get(id)
     db.session.delete(personne)
     db.session.commit()
+def getmanageriales():
+    amn_1=AstreinteManageriale.query.filter_by(niveau_astreintes="N+1")
+    amn_2 = AstreinteManageriale.query.filter_by(niveau_astreintes="N+2")
+    amn_3 = AstreinteManageriale.query.filter_by(niveau_astreintes="N+3")
+    if(compteur(amn_1)==compteurP(amn_1)):
+        getOKandE(amn_1)
+    elif(compteur(amn_1)<compteurP(amn_1)):
+        changementEtat(amn_1)
+        if (compteur(amn_1)==compteurP(amn_1)):
+            if (compteur(amn_2)==compteurP(amn_2)):
+                getOKandE(amn_2)
+                getinitial(amn_1)
+            elif (compteur(amn_2)<compteurP(amn_2)):
+                changementEtat(amn_2)
+                getmanagE(amn_2)
+                getinitial(amn_1)
+        elif(compteur(amn_1)<compteurP(amn_1)):
+            getmanagE(amn_1)
+    if(compteur(amn_3)==compteurP(amn_3)):
+        getOKandE(amn_3)
+    elif(compteur(amn_3)<compteurP(amn_3)):
+        changementEtat(amn_3)
+        getmanagE(amn_3)
 
-
-@app.route('/astreint-semaines', methods=['GET'])
 def get_astreints(service:str,sousservice:str,int_id:int):
     services=Service.query.filter_by(nom_service=service,sous_service=sousservice,id=int_id).first()
-    compteurI=0
-    pers_in_service = services.personnes
-    for personne in pers_in_service:
-        if personne.code==1:
-            compteurI=compteurI+1
-
-    if(compteurI==len(pers_in_service)):
-        personneOk = getOK(service, sousservice, int_id)
-        personneE=getE(service, sousservice, int_id)
-        for personne in pers_in_service:
-            if personne != personneOk and personne != personneE:
-                personne.etat="NA"
-                personne.code=0
-                db.session.add(personne)
-                db.session.commit()
-    elif(compteurI<len(pers_in_service)):
-        for personne in pers_in_service:
-            if personne.etat == "OK":
-                personne.etat = "NE"
-                db.session.add(personne)
-                db.session.commit()
-            elif personne.etat == "E":
-                personne.etat = "OK"
-                personne.code = 1
-                personne.date_time = datetime.utcnow()
-                db.session.add(personne)
-                db.session.commit()
-        getE(service, sousservice, int_id)
-
-@app.route('/astreintes', methods=['GET'])
-def send():
-    personnes = Personne.query.all()
-    services = Service.query.all()
-
-    for service in services:
-        get_astreints(service.nom_service,service.sous_service,service.id)
-
-    astrientes =[]
-
-    for personne in personnes:
-        if personne.etat == "OK":
-            astrientes.append(personne)
-    get_gdp_data(astrientes)
-    return "message envoyer"
+    pers_in_service=services.personnes
+    if(compteur(pers_in_service)==len(pers_in_service)):
+        getOKandE(pers_in_service)
+    elif(compteur(pers_in_service)<len(pers_in_service)):
+        changementEtat(pers_in_service)
+        getmanagE(pers_in_service)
 
 @app.route('/initiale', methods=['GET'])
-def etat_initiale():
-    all_personnes=Personne.query.all()
-    for personne in all_personnes:
+def initiale():
+    personnes=Personne.query.all()
+    manageriales = AstreinteManageriale.query.all()
+    getinitial(personnes)
+    getinitial(manageriales)
+    return "INITIALISATION SUCCESS"
+def getinitial(personnes):
+    for personne in personnes:
         personne.etat = "NE"
         personne.code = 1
         personne.date_time = datetime.utcnow()
         db.session.add(personne)
         db.session.commit()
-    return "BD UPDATE SUCCESS"
 
-def getOK(service,sousservice,int_id):
+@app.route('/astreintes', methods=['GET'])
+def send():
+    personnes = Personne.query.all()
+    manageriales = AstreinteManageriale.query.all()
+    services = Service.query.all()
 
-    services = Service.query.filter_by(nom_service=service,sous_service=sousservice,id=int_id).first()
-    pers_in_service = services.personnes
-    personneOK = random.choice(list(pers_in_service))
-    for personne in pers_in_service:
+    for service in services:
+        get_astreints(service.nom_service,service.sous_service,service.id)
+    getmanageriales()
+
+    astrientes=[]
+    astrientes_manag=[]
+    for personne in personnes:
+        if personne.etat == "OK":
+            astrientes.append(personne)
+
+    for manageriale in manageriales:
+        if manageriale.etat=="OK":
+            astrientes_manag.append(manageriale)
+    get_gdp_data(astrientes,astrientes_manag)
+
+    return "message envoyer"
+
+def getmanagOK(amn):
+    personneOK = random.choice(list(amn))
+    for personne in amn:
         if personneOK.date_time > personne.date_time:
             personneOK = personne
-    personneOK.date_time = datetime.utcnow()
     personneOK.etat = "OK"
+    personneOK.date_time=datetime.utcnow()
     personneOK.code = 1
     db.session.add(personneOK)
     db.session.commit()
     return personneOK
 
-def getE(service,sousservice,int_id):
-    services = Service.query.filter_by(nom_service=service, sous_service=sousservice, id=int_id).first()
-    pers_in_service = services.personnes
-    personneE = random.choice(list(pers_in_service))
-    for personne in pers_in_service:
-        if personneE.date_time > personne.date_time:
-            personneE = personne
-    personneE.etat = "E"
-    personneE.code = 0
+def getmanagE(amn):
+    personneE=random.choice(list(amn))
+    for personne in amn:
+        if personneE.date_time>personne.date_time:
+            personneE=personne
+    personneE.etat="E"
+    personneE.code=0
     db.session.add(personneE)
     db.session.commit()
     return personneE
+
+def changementEtat(personnes):
+    for personne in personnes:
+        if personne.etat == "OK":
+            personne.etat = "NE"
+            db.session.add(personne)
+            db.session.commit()
+        elif personne.etat == "E":
+            personne.etat = "OK"
+            personne.code = 1
+            personne.date_time = datetime.utcnow()
+            db.session.add(personne)
+            db.session.commit()
+
+
+def compteur(personnes):
+    indice=0
+    for personne in personnes:
+        if personne.code==1:
+            indice = indice + 1
+    return indice
+
+def compteurP(personnes):
+    indice=0
+    for personne in personnes:
+        indice = indice + 1
+    return indice
+
+def getOKandE(amn):
+    personneOk = getmanagOK(amn)
+    personneE = getmanagE(amn)
+    for personne in amn:
+        if personne != personneOk and personne != personneE:
+            personne.etat = "NA"
+            personne.code = 0
+            db.session.add(personne)
+            db.session.commit()
 
 if __name__ == '__main__':
     app.run(debug=True, host="127.0.0.1",port=5000)

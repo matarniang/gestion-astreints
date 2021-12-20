@@ -10620,3 +10620,224 @@ Traceback (most recent call last):
   File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/werkzeug/serving.py", line 984, in run_simple
     s.bind(server_address)
 OSError: [Errno 48] Address already in use
+ * Serving Flask app 'base' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+Traceback (most recent call last):
+  File "/Users/user/Documents/python/api-astreintes/base.py", line 294, in <module>
+    app.run(debug=True, host="127.0.0.1",port=5000)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/flask/app.py", line 920, in run
+    run_simple(t.cast(str, host), port, self, **options)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/werkzeug/serving.py", line 984, in run_simple
+    s.bind(server_address)
+OSError: [Errno 48] Address already in use
+ * Serving Flask app 'base' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+Traceback (most recent call last):
+  File "/Users/user/Documents/python/api-astreintes/base.py", line 294, in <module>
+    app.run(debug=True, host="127.0.0.1",port=5000)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/flask/app.py", line 920, in run
+    run_simple(t.cast(str, host), port, self, **options)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/werkzeug/serving.py", line 984, in run_simple
+    s.bind(server_address)
+OSError: [Errno 48] Address already in use
+ * Serving Flask app 'base' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+Traceback (most recent call last):
+  File "/Users/user/Documents/python/api-astreintes/base.py", line 294, in <module>
+    app.run(debug=True, host="127.0.0.1",port=5000)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/flask/app.py", line 920, in run
+    run_simple(t.cast(str, host), port, self, **options)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/werkzeug/serving.py", line 984, in run_simple
+    s.bind(server_address)
+OSError: [Errno 48] Address already in use
+ * Serving Flask app 'base' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+Traceback (most recent call last):
+  File "/Users/user/Documents/python/api-astreintes/base.py", line 294, in <module>
+    app.run(debug=True, host="127.0.0.1",port=5000)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/flask/app.py", line 920, in run
+    run_simple(t.cast(str, host), port, self, **options)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/werkzeug/serving.py", line 984, in run_simple
+    s.bind(server_address)
+OSError: [Errno 48] Address already in use
+ * Serving Flask app 'base' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+Traceback (most recent call last):
+  File "/Users/user/Documents/python/api-astreintes/base.py", line 294, in <module>
+    app.run(debug=True, host="127.0.0.1",port=5000)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/flask/app.py", line 920, in run
+    run_simple(t.cast(str, host), port, self, **options)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/werkzeug/serving.py", line 984, in run_simple
+    s.bind(server_address)
+OSError: [Errno 48] Address already in use
+ * Serving Flask app 'base' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+Traceback (most recent call last):
+  File "/Users/user/Documents/python/api-astreintes/base.py", line 294, in <module>
+    app.run(debug=True, host="127.0.0.1",port=5000)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/flask/app.py", line 920, in run
+    run_simple(t.cast(str, host), port, self, **options)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/werkzeug/serving.py", line 984, in run_simple
+    s.bind(server_address)
+OSError: [Errno 48] Address already in use
+ * Serving Flask app 'base' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+Traceback (most recent call last):
+  File "/Users/user/Documents/python/api-astreintes/base.py", line 294, in <module>
+    app.run(debug=True, host="127.0.0.1",port=5000)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/flask/app.py", line 920, in run
+    run_simple(t.cast(str, host), port, self, **options)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/werkzeug/serving.py", line 984, in run_simple
+    s.bind(server_address)
+OSError: [Errno 48] Address already in use
+ * Serving Flask app 'base' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+Traceback (most recent call last):
+  File "/Users/user/Documents/python/api-astreintes/base.py", line 294, in <module>
+    app.run(debug=True, host="127.0.0.1",port=5000)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/flask/app.py", line 920, in run
+    run_simple(t.cast(str, host), port, self, **options)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/werkzeug/serving.py", line 984, in run_simple
+    s.bind(server_address)
+OSError: [Errno 48] Address already in use
+ * Serving Flask app 'base' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+Traceback (most recent call last):
+  File "/Users/user/Documents/python/api-astreintes/base.py", line 294, in <module>
+    app.run(debug=True, host="127.0.0.1",port=5000)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/flask/app.py", line 920, in run
+    run_simple(t.cast(str, host), port, self, **options)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/werkzeug/serving.py", line 984, in run_simple
+    s.bind(server_address)
+OSError: [Errno 48] Address already in use
+ * Serving Flask app 'base' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+Traceback (most recent call last):
+  File "/Users/user/Documents/python/api-astreintes/base.py", line 294, in <module>
+    app.run(debug=True, host="127.0.0.1",port=5000)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/flask/app.py", line 920, in run
+    run_simple(t.cast(str, host), port, self, **options)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/werkzeug/serving.py", line 984, in run_simple
+    s.bind(server_address)
+OSError: [Errno 48] Address already in use
+ * Serving Flask app 'base' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+Traceback (most recent call last):
+  File "/Users/user/Documents/python/api-astreintes/base.py", line 294, in <module>
+    app.run(debug=True, host="127.0.0.1",port=5000)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/flask/app.py", line 920, in run
+    run_simple(t.cast(str, host), port, self, **options)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/werkzeug/serving.py", line 984, in run_simple
+    s.bind(server_address)
+OSError: [Errno 48] Address already in use
+ * Serving Flask app 'base' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+Traceback (most recent call last):
+  File "/Users/user/Documents/python/api-astreintes/base.py", line 294, in <module>
+    app.run(debug=True, host="127.0.0.1",port=5000)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/flask/app.py", line 920, in run
+    run_simple(t.cast(str, host), port, self, **options)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/werkzeug/serving.py", line 984, in run_simple
+    s.bind(server_address)
+OSError: [Errno 48] Address already in use
+ * Serving Flask app 'base' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+Traceback (most recent call last):
+  File "/Users/user/Documents/python/api-astreintes/base.py", line 294, in <module>
+    app.run(debug=True, host="127.0.0.1",port=5000)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/flask/app.py", line 920, in run
+    run_simple(t.cast(str, host), port, self, **options)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/werkzeug/serving.py", line 984, in run_simple
+    s.bind(server_address)
+OSError: [Errno 48] Address already in use
+ * Serving Flask app 'base' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+Traceback (most recent call last):
+  File "/Users/user/Documents/python/api-astreintes/base.py", line 294, in <module>
+    app.run(debug=True, host="127.0.0.1",port=5000)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/flask/app.py", line 920, in run
+    run_simple(t.cast(str, host), port, self, **options)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/werkzeug/serving.py", line 984, in run_simple
+    s.bind(server_address)
+OSError: [Errno 48] Address already in use
+ * Serving Flask app 'base' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+Traceback (most recent call last):
+  File "/Users/user/Documents/python/api-astreintes/base.py", line 294, in <module>
+    app.run(debug=True, host="127.0.0.1",port=5000)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/flask/app.py", line 920, in run
+    run_simple(t.cast(str, host), port, self, **options)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/werkzeug/serving.py", line 984, in run_simple
+    s.bind(server_address)
+OSError: [Errno 48] Address already in use
+ * Serving Flask app 'base' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+Traceback (most recent call last):
+  File "/Users/user/Documents/python/api-astreintes/base.py", line 294, in <module>
+    app.run(debug=True, host="127.0.0.1",port=5000)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/flask/app.py", line 920, in run
+    run_simple(t.cast(str, host), port, self, **options)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/werkzeug/serving.py", line 984, in run_simple
+    s.bind(server_address)
+OSError: [Errno 48] Address already in use
+ * Serving Flask app 'base' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+Traceback (most recent call last):
+  File "/Users/user/Documents/python/api-astreintes/base.py", line 294, in <module>
+    app.run(debug=True, host="127.0.0.1",port=5000)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/flask/app.py", line 920, in run
+    run_simple(t.cast(str, host), port, self, **options)
+  File "/Users/user/Desktop/api-astreintes/venv/lib/python3.10/site-packages/werkzeug/serving.py", line 984, in run_simple
+    s.bind(server_address)
+OSError: [Errno 48] Address already in use
