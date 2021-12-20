@@ -164,24 +164,30 @@ def getmanageriales():
     amn_2 = AstreinteManageriale.query.filter_by(niveau_astreintes="N+2")
     amn_3 = AstreinteManageriale.query.filter_by(niveau_astreintes="N+3")
     if(compteur(amn_1)==compteurP(amn_1)):
-        getOKandE(amn_1)
-    elif(compteur(amn_1)<compteurP(amn_1)):
-        changementEtat(amn_1)
-        if (compteur(amn_1)==compteurP(amn_1)):
+        if (compteur(amn_1) == compteurP(amn_1)) and compteurNE(amn_1) < compteurP(amn_1):
+            getNA(amn_1)
             if (compteur(amn_2)==compteurP(amn_2)):
                 getOKandE(amn_2)
-                getinitial(amn_1)
             elif (compteur(amn_2)<compteurP(amn_2)):
-                changementEtat(amn_2)
-                getmanagE(amn_2)
-                getinitial(amn_1)
-        elif(compteur(amn_1)<compteurP(amn_1)):
+                getOKandE(amn_2)
+        else:
+            getNA(amn_2)
+            getOKandE(amn_1)
+    elif(compteur(amn_1)<compteurP(amn_1)):
+        changementEtat(amn_1)
+        if compteur(amn_1) == compteurP(amn_1):
+            pass
+        else:
             getmanagE(amn_1)
     if(compteur(amn_3)==compteurP(amn_3)):
         getOKandE(amn_3)
     elif(compteur(amn_3)<compteurP(amn_3)):
         changementEtat(amn_3)
+        if compteur(amn_3) == compteurP(amn_3):
+            getOKandE(amn_3)
         getmanagE(amn_3)
+
+
 
 def get_astreints(service:str,sousservice:str,int_id:int):
     services=Service.query.filter_by(nom_service=service,sous_service=sousservice,id=int_id).first()
@@ -190,6 +196,8 @@ def get_astreints(service:str,sousservice:str,int_id:int):
         getOKandE(pers_in_service)
     elif(compteur(pers_in_service)<len(pers_in_service)):
         changementEtat(pers_in_service)
+        if compteur(pers_in_service) == compteurP(pers_in_service):
+            getOKandE(pers_in_service)
         getmanagE(pers_in_service)
 
 @app.route('/initiale', methods=['GET'])
@@ -266,6 +274,12 @@ def changementEtat(personnes):
             db.session.add(personne)
             db.session.commit()
 
+def compteurNE(personnes):
+    i=0
+    for personne in personnes:
+        if personne.etat=="NE":
+            i = i + 1
+    return i
 
 def compteur(personnes):
     indice=0
@@ -289,7 +303,11 @@ def getOKandE(amn):
             personne.code = 0
             db.session.add(personne)
             db.session.commit()
-
+def getNA(amn):
+    for personne in amn:
+        personne.etat="NE"
+        db.session.add(personne)
+        db.session.commit()
 if __name__ == '__main__':
     app.run(debug=True, host="127.0.0.1",port=5000)
 
