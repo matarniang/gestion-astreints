@@ -15,10 +15,7 @@ content = open("config/gmail.json", mode="r", encoding=None)
 config = json.load(content)
 email = config["username"]
 password = config["password"]
-# password = "iqsrsrxqhmvehkde"
-# email = "balloniang415@gmail.com"
 sender = "balloniang415@gmail.com"
-
 
 # receiver = ['balloniang415@gmail.com','disi2212@gmail.com','khadyfall777@yahoo.fr','seckkhadime2@gmail.com']
 def get_gdp_data(astreints:list,astreints_manag:list):
