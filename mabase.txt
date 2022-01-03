@@ -1,0 +1,144 @@
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE departement (
+	id INTEGER NOT NULL, 
+	nom_departement VARCHAR(100), 
+	nom_direction VARCHAR(100), 
+	PRIMARY KEY (id)
+);
+INSERT INTO departement VALUES(1,'A2I','DSI');
+INSERT INTO departement VALUES(2,'EAI','DSI');
+INSERT INTO departement VALUES(3,'DD','DST');
+INSERT INTO departement VALUES(4,'SMC','DSI');
+INSERT INTO departement VALUES(5,'APS','DSI');
+INSERT INTO departement VALUES(6,'INS','DSI');
+INSERT INTO departement VALUES(7,'OCIO','DSI');
+INSERT INTO departement VALUES(8,'CSPS','DSI');
+INSERT INTO departement VALUES(9,'DIF','DAC');
+INSERT INTO departement VALUES(10,'CES','DAC');
+INSERT INTO departement VALUES(11,NULL,'DSI');
+INSERT INTO departement VALUES(12,NULL,'DST');
+INSERT INTO departement VALUES(13,NULL,'DAC');
+CREATE TABLE service (
+	id INTEGER NOT NULL, 
+	nom_service VARCHAR(100), 
+	departement_id INTEGER, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(departement_id) REFERENCES departement (id)
+);
+INSERT INTO service VALUES(1,'ARS',1);
+INSERT INTO service VALUES(2,'EPD',2);
+INSERT INTO service VALUES(3,'FAC',2);
+INSERT INTO service VALUES(4,'MRI',2);
+INSERT INTO service VALUES(5,'CORP',2);
+INSERT INTO service VALUES(6,'DBA',1);
+INSERT INTO service VALUES(7,'DBM',3);
+INSERT INTO service VALUES(8,'SICLI',2);
+INSERT INTO service VALUES(9,'SSBA',1);
+INSERT INTO service VALUES(10,'COP',1);
+CREATE TABLE perimetre (
+	id INTEGER NOT NULL, 
+	nom_perimetre VARCHAR(100), 
+	service_id INTEGER, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(service_id) REFERENCES service (id)
+);
+INSERT INTO perimetre VALUES(1,'Support Sécurité & Réseau (ARS)',1);
+INSERT INTO perimetre VALUES(2,'Suuport Applications digitales, OrangeMoney, IRIS',2);
+INSERT INTO perimetre VALUES(3,'Support GAIA, Matrix, 601',3);
+INSERT INTO perimetre VALUES(4,'Support Mediation Zone, Interco, Roaming',4);
+INSERT INTO perimetre VALUES(5,'Support Corporate : IPM, Kelio, Docubase',5);
+INSERT INTO perimetre VALUES(6,'Support BDD (DBA)',6);
+INSERT INTO perimetre VALUES(7,'Décisionnel, MONETA, NIKIRA,Big Data,Radar , Fraude & RA (DST/DD/DBM)',7);
+INSERT INTO perimetre VALUES(8,'Galaxy OMEGA',8);
+INSERT INTO perimetre VALUES(9,'KIBARU, Simplissimo, NESSICO, KPSA',8);
+INSERT INTO perimetre VALUES(10,'Support Systèmes Unix (SSBA)',9);
+INSERT INTO perimetre VALUES(11,'Support Systèmes WINDOWS (SSBA)',9);
+INSERT INTO perimetre VALUES(12,'Support Systèmes Sauvegarde&Stockage (SSBA)',9);
+INSERT INTO perimetre VALUES(13,'Support COP',10);
+CREATE TABLE astreinte (
+	id INTEGER NOT NULL, 
+	nom VARCHAR(100), 
+	prenom VARCHAR(100), 
+	email VARCHAR(100), 
+	etat VARCHAR(100), 
+	date_time DATETIME, 
+	telephone VARCHAR(100), 
+	perimetre_id INTEGER, 
+	departement_id INTEGER, 
+	status VARCHAR(100), 
+	code INTEGER, 
+	type_astreintes VARCHAR(100), 
+	niveau_astreintes VARCHAR(100), 
+	nombre_semaine INTEGER NOT NULL, 
+	compteursemaines INTEGER NOT NULL, date_debut datetime, date_fin datetime, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(perimetre_id) REFERENCES perimetre (id), 
+	FOREIGN KEY(departement_id) REFERENCES departement (id)
+);
+INSERT INTO astreinte VALUES(1,'Mame Biram','DIOUF','null','NE','2021-12-31 02:34:15.447211','77 644 57 38',1,NULL,' chef de service',1,'AO','N+1',1,1,'2021-12-31 02:15:03.306947','2021-12-31 02:15:42.017945');
+INSERT INTO astreinte VALUES(2,'Mady','GUEYE','null','NE','2021-12-31 02:34:39.429872','77 450 40 34',1,NULL,'agent',1,'AO','N',1,1,NULL,NULL);
+INSERT INTO astreinte VALUES(3,'Ibrahima','FALL','null','OK','2021-12-31 02:35:06.084348','77 450 37 12',1,NULL,'agent',1,'AO','N',1,1,NULL,NULL);
+INSERT INTO astreinte VALUES(4,'Rahmane','DIAKHO','null','E','2021-12-31 02:28:57.272278','77 569 56 41',1,NULL,'agent',0,'AO','N',1,0,NULL,NULL);
+INSERT INTO astreinte VALUES(5,'Amadou Moctar','NDIAYE','null','NA','2021-12-31 02:33:17.270875','77 569 39 54',1,NULL,'agent',0,'AO','N',1,0,NULL,NULL);
+INSERT INTO astreinte VALUES(6,'Gora','DIARRA','null','NE','2021-12-31 02:34:15.849677','77 529 69 59',2,NULL,'chef de service',1,'AO','N+1',1,1,'2021-12-31 02:15:03.602954',NULL);
+INSERT INTO astreinte VALUES(7,'Assane ','SECK','null','NE','2021-12-31 02:34:39.473444','77 569 60 65',2,NULL,'agent',1,'AO','N',1,1,NULL,NULL);
+INSERT INTO astreinte VALUES(8,'Moucharda habiballah','SEYE','null','OK','2021-12-31 02:35:06.135938','77 420 32 91',2,NULL,'agent',1,'AO','N',1,1,NULL,NULL);
+INSERT INTO astreinte VALUES(9,'Cheikh Djibril ','SOW','null','E','2021-12-31 02:29:00.401956','77 377 25 44',2,NULL,'agent',0,'AO','N',1,0,NULL,NULL);
+INSERT INTO astreinte VALUES(10,'Serigne Saliou ','GUEYE','null','NA','2021-12-31 02:33:18.404559','77 816 91 45',2,NULL,'agent',0,'AO','N',1,0,NULL,NULL);
+INSERT INTO astreinte VALUES(11,'Samba','DIOP','null','NE','2021-12-31 02:34:39.523167','77 099 58 16',3,NULL,'chef de service',1,'AO','N+1',1,1,'2021-12-31 02:15:03.835118',NULL);
+INSERT INTO astreinte VALUES(12,'Papa Thierno','DIALLO','null','OK','2021-12-31 02:35:06.195256','77 638 97 97',3,NULL,'agent',1,'AO','N',1,1,NULL,NULL);
+INSERT INTO astreinte VALUES(13,'Marie Hann','DIOP','null','E','2021-12-31 02:34:15.891033','77 450 56 97',3,NULL,'agent',0,'AO','N',1,0,NULL,NULL);
+INSERT INTO astreinte VALUES(14,'Moustapha','SARR','null','NE','2021-12-31 02:34:15.934062','77 099 98 25',4,NULL,'chef de service',1,'AO','N+1',1,1,'2021-12-31 02:15:03.903549',NULL);
+INSERT INTO astreinte VALUES(15,'Khady','SECK','null','NE','2021-12-31 02:34:39.557630','77 644 91 40',4,NULL,'agent',1,'AO','N',1,1,NULL,NULL);
+INSERT INTO astreinte VALUES(16,'Matar','LO','null','OK','2021-12-31 02:35:06.236330','77 333 66 08',4,NULL,'agent',1,'AO','N',1,1,NULL,NULL);
+INSERT INTO astreinte VALUES(17,'Mohamed ','DEME','null','E','2021-12-31 02:29:01.772433','77 099 11 93',4,NULL,'agent',0,'AO','N',1,0,NULL,NULL);
+INSERT INTO astreinte VALUES(18,'Ahmed B. S. B.','SEYE','null','NA','2021-12-31 02:33:20.806938','77 099 14 29',4,NULL,'agent',0,'AO','N',1,0,NULL,NULL);
+INSERT INTO astreinte VALUES(19,'Sada Kalidou','SOW','null','NE','2021-12-31 02:34:39.601691','77 099 28 40',5,NULL,'chef de service',1,'AO','N+1',1,1,'2021-12-31 02:15:04.201565',NULL);
+INSERT INTO astreinte VALUES(20,'Jean Charles','BOCANDE','null','OK','2021-12-31 02:35:06.348544','77 639 89 99',5,NULL,'agent',1,'AO','N',1,1,NULL,NULL);
+INSERT INTO astreinte VALUES(21,'Ndiaga ','BA','null','NE','2021-12-31 02:34:39.672236','77 099 53 91',6,NULL,'chef de service',1,'AO','N+1',1,1,'2021-12-31 02:15:04.241465',NULL);
+INSERT INTO astreinte VALUES(22,'Magatte','THIAM','null','OK','2021-12-31 02:35:06.412464','77 333 60 88',6,NULL,'agent',1,'AO','N',1,1,NULL,NULL);
+INSERT INTO astreinte VALUES(23,'Elhadji Amadou ','GUEYE','null','E','2021-12-31 02:34:16.004969','77 099 53 05',6,NULL,'agent',0,'AO','N',1,0,NULL,NULL);
+INSERT INTO astreinte VALUES(24,'Ababacar','DIOUF','null','NE','2021-12-31 02:33:24.337004','77 637 64 13',7,NULL,'chef de service',1,'AO','N+1',1,1,'2021-12-31 02:15:04.687877',NULL);
+INSERT INTO astreinte VALUES(25,'Awa ','THIAM','null','NE','2021-12-31 02:34:16.022549','77 644 65 35',7,NULL,'agent',1,'AO','N',1,1,NULL,NULL);
+INSERT INTO astreinte VALUES(26,'Mouhamed','TALL','null','NE','2021-12-31 02:34:39.717525','77 569 60 64',7,NULL,'agent',1,'AO','N',1,1,NULL,NULL);
+INSERT INTO astreinte VALUES(27,'Aminata Macky','TALL','null','OK','2021-12-31 02:35:06.683191','77 639 49 84',7,NULL,'agent',1,'AO','N',1,1,NULL,NULL);
+INSERT INTO astreinte VALUES(28,'Oumar','SALL','null','NE','2021-12-31 02:34:39.764012','77 569 31 03',8,NULL,'chef de service',1,'AO','N+1',1,1,'2021-12-31 02:15:04.791957',NULL);
+INSERT INTO astreinte VALUES(29,'Pape Mor','SYLLA','null','OK','2021-12-31 02:35:06.780208','77 099 28 05',8,NULL,'agent',1,'AO','N',1,1,NULL,NULL);
+INSERT INTO astreinte VALUES(30,'Cheikh Abdallah','SOUGOU','null','NE','2021-12-31 02:33:24.971450','77 099 28 48',9,NULL,'chef de service',1,'AO','N+1',1,1,'2021-12-31 02:15:04.812666',NULL);
+INSERT INTO astreinte VALUES(31,'Dominique N.','FAYE','null','NE','2021-12-31 02:34:16.062181','77 099 52 96',9,NULL,'agent',1,'AO','N',1,1,NULL,NULL);
+INSERT INTO astreinte VALUES(32,'Ndeye Ndella','SAMB','null','NE','2021-12-31 02:34:39.802534','77 740 16 72',9,NULL,'agent',1,'AO','N',1,1,NULL,NULL);
+INSERT INTO astreinte VALUES(33,'Khadidiatou','SEYE','null','OK','2021-12-31 02:35:06.827464','77 333 32 24',9,NULL,'agent',1,'AO','N',1,1,NULL,NULL);
+INSERT INTO astreinte VALUES(34,'Thierry Delphin KAYA ','MATIMBOU','null','NE','2021-12-31 02:34:39.977008','77 644 91 42',10,NULL,'chef de service',1,'AO','N+1',1,1,'2021-12-31 02:15:04.842423',NULL);
+INSERT INTO astreinte VALUES(35,'Ndiaga ','GUEYE','null','OK','2021-12-31 02:35:06.896118','77 099 98 37',10,NULL,'agent',1,'AO','N',1,1,NULL,NULL);
+INSERT INTO astreinte VALUES(36,'Diallo','KANE','null','E','2021-12-31 02:34:16.084255','78 620 49 41',10,NULL,'agent',0,'AO','N',1,0,NULL,NULL);
+INSERT INTO astreinte VALUES(37,'Sire','DIAGNE','null','NE','2021-12-31 02:34:40.049585','77 450 20 77',11,NULL,'chef de service',1,'AO','N+1',1,1,'2021-12-31 02:15:04.868416',NULL);
+INSERT INTO astreinte VALUES(38,'Guirguélia Flore Providence','SADIO','null','OK','2021-12-31 02:35:06.936235','77 099 36 11',11,NULL,'agent',1,'AO','N',1,1,NULL,NULL);
+INSERT INTO astreinte VALUES(39,'Saliou','SAGNE','null','E','2021-12-31 02:34:16.100922','77 644 73 99',11,NULL,'agent',0,'AO','N',1,0,NULL,NULL);
+INSERT INTO astreinte VALUES(40,'Mouhamadou Sylla','DIENG','null','NE','2021-12-31 02:34:40.109006','78 620 49 44',12,NULL,'chef de service',1,'AO','N+1',1,1,'2021-12-31 02:15:04.892969',NULL);
+INSERT INTO astreinte VALUES(41,'Sire','DIAGNE','null','OK','2021-12-31 02:35:06.978260','77 450 20 77',12,NULL,'agent',1,'AO','N',1,1,NULL,NULL);
+INSERT INTO astreinte VALUES(42,'Mamour Ben Ousmane','NDIAYE','null','E','2021-12-31 02:34:16.119143','77 330 35 65',12,NULL,'agent',0,'AO','N',1,0,NULL,NULL);
+INSERT INTO astreinte VALUES(43,'Djibril','SOW','null','NE','2021-12-31 02:34:16.167076','77 631 04 76',13,NULL,'chef de service',1,'AO','N+1',1,1,'2021-12-31 02:15:04.917552',NULL);
+INSERT INTO astreinte VALUES(44,'Babacar ','SAKHO','null','NE','2021-12-31 02:34:40.149348','77 099 46 36',13,NULL,'agent',1,'AO','N',1,1,NULL,NULL);
+INSERT INTO astreinte VALUES(45,'Ndeye Ndack','SARR','null','OK','2021-12-31 02:35:07.006513','77 644 91 24',13,NULL,'agent',1,'AO','N',1,1,NULL,NULL);
+INSERT INTO astreinte VALUES(46,'Alioune ','DIAGNE','null','E','2021-12-31 02:29:06.860351','78 589 80 34',13,NULL,'agent',0,'AO','N',1,0,NULL,NULL);
+INSERT INTO astreinte VALUES(47,'Amadou Wane ','GUISSE','null','NA','2021-12-31 02:33:26.406711','77 099 53 04',13,NULL,'agent',0,'AO','N',1,0,NULL,NULL);
+INSERT INTO astreinte VALUES(48,'Arona','NIANG','null','OK','2021-12-31 02:35:07.076491','77 569 85 79',NULL,9,'chef de departement',1,'AM','N+1',1,1,NULL,NULL);
+INSERT INTO astreinte VALUES(49,'Papa Djibril','GUEYE','null','E','2021-12-31 02:14:53.962512','77 569 91 51',NULL,10,'chef de departement',0,'AM','N+1',1,0,NULL,NULL);
+INSERT INTO astreinte VALUES(50,'Mouhamadou lamine','CAMARA','null','NA','2021-12-31 02:14:53.969378','77 637 62 73',NULL,5,'chef de departement',0,'AM','N+1',1,0,NULL,NULL);
+INSERT INTO astreinte VALUES(51,'Serigne Abdou Aziz','WADE','null','NA','2021-12-31 02:14:54.004012','77 639 60 38',NULL,6,'chef de departement',0,'AM','N+1',1,0,NULL,NULL);
+INSERT INTO astreinte VALUES(52,'Malado Baba','WONE','null','NA','2021-12-31 02:14:54.011934','77 450 37 16',NULL,7,'chef de departement',0,'AM','N+1',1,0,NULL,NULL);
+INSERT INTO astreinte VALUES(54,'Amadou Mactar','NIANG','null','NA','2021-12-31 02:14:54.019574','77 644 30 68',NULL,8,'chef de departement',0,'AM','N+1',1,0,NULL,NULL);
+INSERT INTO astreinte VALUES(55,'Saer','TOURE','null','NE','2021-12-31 02:33:26.567592','77 544 49 69',NULL,2,'chef de departement',1,'AM','N+2',1,1,'2021-12-31 02:15:04.986776',NULL);
+INSERT INTO astreinte VALUES(56,'Coumba Diouf','NDIAYE','null','NE','2021-12-31 02:34:16.224769','77 637 75 07',NULL,4,'chef de departement',1,'AM','N+2',1,1,NULL,NULL);
+INSERT INTO astreinte VALUES(57,'Joseph Edouard','NDIAYE','null','NE','2021-12-31 02:34:40.185712','77 569 25 37',NULL,1,'chef de departement',1,'AM','N+2',1,1,NULL,NULL);
+INSERT INTO astreinte VALUES(58,'Racky Sada','WANE','null','NE','2021-12-31 02:34:40.233383','77 569 03 86',NULL,11,'chef de direction',1,'AM','N+3',1,1,'2021-12-31 02:15:05.011885',NULL);
+INSERT INTO astreinte VALUES(59,'Ibrahima','SAMB','null','OK','2021-12-31 02:35:07.375545','77 644 40 80',NULL,13,'chef de departement',1,'AM','N+3',1,1,NULL,NULL);
+INSERT INTO astreinte VALUES(60,'Coumba Diouf','NDIAYE','null','E','2021-12-31 02:34:16.250781','77 637 75 07',NULL,4,'chef de departement',0,'AM','N+3',1,0,NULL,NULL);
+CREATE TABLE historique (
+	id INTEGER NOT NULL, 
+	astreinte_id INTEGER, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(astreinte_id) REFERENCES astreinte (id)
+);
+COMMIT;
