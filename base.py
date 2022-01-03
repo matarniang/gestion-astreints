@@ -12,8 +12,8 @@ import os
 
 app = Flask(__name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'db.sqlite')
-#app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DEV_DATABASE_URL') or 'mysql+pymysql://root:root@localhost:8889/GestionAstreintes'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'db.sqlite')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DEV_DATABASE_URL') or 'mysql+pymysql://root:root@localhost:8889/GestionAstreintes'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -270,13 +270,14 @@ def send():
         if astreinte.etat == "OK":
             astreinte.date_fin = datetime.utcnow()
             Commite(astreinte)
-            historique = Historique(astreinte_id=astreinte.id,date_debut=astreinte.date_debut,date_fin=astreinte.date_fin)
-            Commite(historique)
+            #historique = Historique(astreinte_id=astreinte.id,date_debut=astreinte.date_debut,date_fin=astreinte.date_fin)
+            #Commite(historique)
 
-    for perimetre in perimetres:
-        getOp(perimetre.nom_perimetre)
+    # for perimetre in perimetres:
+    #     getOp(perimetre.nom_perimetre)
+    getOp("Support Sécurité & Réseau (ARS)")
 
-    getMg()
+   # getMg()
 
     astrientes=[]
 
@@ -414,7 +415,7 @@ def setDatetimeZero(amn):
 #         print(" {} ".format(personne.date_debut))
 #     return "Success"
 if __name__ == '__main__':
-    app.run(debug=True, host="127.0.0.1",port=50000)
+    app.run(debug=True, host="127.0.0.1",port=5000)
 
 
 
