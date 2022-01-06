@@ -68,7 +68,7 @@ class Astreinte(db.Model):
     date_debut = db.Column(db.DateTime, nullable=False)
     date_fin = db.Column(db.DateTime,nullable=False )
     historiques = db.relationship('Historique', backref=db.backref('Astreinte'))
-    TagManager = db.Column(db.String(100), nullable=True)
+    #TagManager = db.Column(db.String(100), nullable=True)
 class Historique(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     astreinte_id = db.Column(db.Integer, db.ForeignKey('astreinte.id'))
@@ -86,9 +86,11 @@ class Historique(db.Model):
 ##====> le choix d'une personne depend de son datetime(datetime minimale)
 
 def getMg():
-
-    amn_1 = Astreinte.query.filter_by(type_astreintes="AM",TagManager="manageriale_1")
-    amn_2 = Astreinte.query.filter_by(type_astreintes="AM",TagManager="manageriale_2")
+    # amn_1 = Astreinte.query.filter_by(type_astreintes="AM",TagManager="manageriale_1")
+    # amn_2 = Astreinte.query.filter_by(type_astreintes="AM",TagManager="manageriale_2")
+    # amn_3 = Astreinte.query.filter_by(type_astreintes="AM",niveau_astreintes="N+3")
+    amn_1 = Astreinte.query.filter_by(type_astreintes="AM",niveau_astreintes="N+1")
+    amn_2 = Astreinte.query.filter_by(type_astreintes="AM",niveau_astreintes="N+2")
     amn_3 = Astreinte.query.filter_by(type_astreintes="AM",niveau_astreintes="N+3")
 
     if (compteur(amn_2) == compteurP(amn_2)):
