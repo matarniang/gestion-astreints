@@ -68,7 +68,7 @@ class Astreinte(db.Model):
     date_debut = db.Column(db.DateTime, nullable=False)
     date_fin = db.Column(db.DateTime,nullable=False )
     historiques = db.relationship('Historique', backref=db.backref('Astreinte'))
-
+    TagManager = db.Column(db.String(100), nullable=True)
 class Historique(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     astreinte_id = db.Column(db.Integer, db.ForeignKey('astreinte.id'))
@@ -87,10 +87,8 @@ class Historique(db.Model):
 
 def getMg():
 
-    amn_1 = Astreinte.query.filter_by(type_astreintes="AM",niveau_astreintes="N+1")
-
-    amn_2 = Astreinte.query.filter_by(type_astreintes="AM",niveau_astreintes="N+2")
-
+    amn_1 = Astreinte.query.filter_by(type_astreintes="AM",TagManager="manageriale_1")
+    amn_2 = Astreinte.query.filter_by(type_astreintes="AM",TagManager="manageriale_2")
     amn_3 = Astreinte.query.filter_by(type_astreintes="AM",niveau_astreintes="N+3")
 
     if (compteur(amn_2) == compteurP(amn_2)):
@@ -206,42 +204,29 @@ def getMg():
 ##====> le choix d'une personne depend de son datetime(datetime minimale)
 
 def getOp(perimetre:str):
-
     perimetres=Perimetre.query.filter_by(nom_perimetre=perimetre).first()
-
     pers_in_as=perimetres.astreintes
-
-    if(compteur(pers_in_as)==len(pers_in_as)):
-
-        if (compteur(pers_in_as) == compteurP(pers_in_as)) and compteurNE(pers_in_as) < compteurP(pers_in_as):
-
-            perso = compteurverife(pers_in_as)
-
-            if perso.nombre_semaine == perso.compteursemaines:
-
-                compteurzero(pers_in_as)
-
-                setDatetimeZero(pers_in_as)
-
-                getOKandE(pers_in_as)
-            else:
-                perso.compteursemaines = perso.compteursemaines+1
-
-                Commite(perso)
-
-        else:
-            getOKandE(pers_in_as)
-
-    elif(compteur(pers_in_as)<len(pers_in_as)):
-
-        changementEtat(pers_in_as)
-
-        if compteur(pers_in_as) == compteurP(pers_in_as):
-
-            pass
-
-        else:getAstreinteE(pers_in_as)
-
+    exclus=getPerimetre_exclus()
+    for p in exclus:
+        if p!=perimetre:
+            if (compteur(pers_in_as) == len(pers_in_as)):
+                if (compteur(pers_in_as) == compteurP(pers_in_as)) and compteurNE(pers_in_as) < compteurP(pers_in_as):
+                    perso = compteurverife(pers_in_as)
+                    if perso.nombre_semaine == perso.compteursemaines:
+                        compteurzero(pers_in_as)
+                        setDatetimeZero(pers_in_as)
+                        getOKandE(pers_in_as)
+                    else:
+                        perso.compteursemaines = perso.compteursemaines + 1
+                        Commite(perso)
+                else:
+                    getOKandE(pers_in_as)
+            elif (compteur(pers_in_as) < len(pers_in_as)):
+                changementEtat(pers_in_as)
+                if compteur(pers_in_as) == compteurP(pers_in_as):
+                    pass
+                else:
+                    getAstreinteE(pers_in_as)
 
 
 #cette methode permet dinilialiser la base de donnees
@@ -270,26 +255,16 @@ def send():
         if astreinte.etat == "OK":
             astreinte.date_fin = datetime.utcnow()
             Commite(astreinte)
-            #historique = Historique(astreinte_id=astreinte.id,date_debut=astreinte.date_debut,date_fin=astreinte.date_fin)
-            #Commite(historique)
-
-    # for perimetre in perimetres:
-    #     getOp(perimetre.nom_perimetre)
-    getOp("Support Sécurité & Réseau (ARS)")
-
-   # getMg()
-
+    for perimetre in perimetres:
+        getOp(perimetre.nom_perimetre)
+    getMg()
     astrientes=[]
-
     for personne in astreintes:
         if personne.etat=="OK":
             astrientes.append(personne)
-
     get_gdp_data(astrientes)
     return "message envoyer"
-
 # cette fonction permet de recuperer la personne qui a le datetime plus petit et changer son etat NE==>OK
-
 def getAtreintesOK(amn):
     personneOK=random.choice(list(amn))
     for personne in amn:
@@ -414,6 +389,13 @@ def setDatetimeZero(amn):
 #     for personne in perso_in_histo:
 #         print(" {} ".format(personne.date_debut))
 #     return "Success"
+
+def getPerimetre_exclus():
+    liste_exlus = []
+    p1 = "Décisionnel, MONETA, NIKIRA,Big Data,Radar , Fraude & RA (DST/DD/DBM)"
+    liste_exlus.append(p1)
+    return liste_exlus
+
 if __name__ == '__main__':
     app.run(debug=True, host="127.0.0.1",port=5000)
 
@@ -421,3 +403,4 @@ if __name__ == '__main__':
 
 # * * * * * cd /Users/user/Documents/python/api-astreintes && . venv/bin/activate && python base.py >> cron.log 2>&1
 # */60 * * * * curl http://127.0.0.1:5000/astreintes
+

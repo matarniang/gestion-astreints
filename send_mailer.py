@@ -26,6 +26,7 @@ def get_gdp_data(astreints:list):
     telephone_ast=[]
     etat_ast=[]
     perimetre_ast=[]
+
     for astreint in astreints:
         prenom_ast.append(astreint.prenom)
         nom_ast.append(astreint.nom)
@@ -35,6 +36,21 @@ def get_gdp_data(astreints:list):
             perimetre_ast.append("")
         elif astreint.perimetre_id != None:
             perimetre_ast.append(Perimetre.query.get(astreint.perimetre_id).nom_perimetre)
+
+    perimetres = getPerimetre_exclus()
+    for perimetre in perimetres:
+        add_perimetres = Perimetre.query.filter_by(nom_perimetre=perimetre).first()
+        pers_in_p = add_perimetres.astreintes
+        for ast in pers_in_p:
+            prenom_ast.append(ast.prenom)
+            nom_ast.append(ast.nom)
+            telephone_ast.append(ast.telephone)
+            etat_ast.append(ast.etat)
+            if ast.perimetre_id == None:
+                perimetre_ast.append("")
+            elif ast.perimetre_id != None:
+                perimetre_ast.append(Perimetre.query.get(ast.perimetre_id).nom_perimetre)
+
 
     dict = {'PRENOM': prenom_ast, 'NOM': nom_ast, 'TELEPHONE': telephone_ast, 'PERIMETRE': perimetre_ast}
     data = pd.DataFrame(dict)
